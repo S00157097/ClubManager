@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ClubManager.Models.ClubModels.Member>
+
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.club.ClubName)</th>
+        <th>@Html.DisplayNameFor(model => model.student.FirstName)</th>
+        <th>@Html.DisplayNameFor(model => model.student.LastName)</th>
+        <th>@Html.DisplayNameFor(model => model.Approved)</th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.club.ClubName)</td>
+        <td>@Html.DisplayFor(modelItem => item.student.FirstName)</td>
+        <td>@Html.DisplayFor(modelItem => item.student.LastName)</td>
+        <td>@Html.DisplayFor(modelItem => item.Approved)</td>
+        <td class="pad-anchors">
+            @Html.ActionLink("Details", "Details", new { id = item.MemberId })
+
+            <a href="@Url.Action("Edit", "ClubEvents", new { id = item.MemberId })" class="text-success">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+
+            <a href="@Url.Action("Delete", "ClubEvents", new { id = item.MemberId })" class="text-danger">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

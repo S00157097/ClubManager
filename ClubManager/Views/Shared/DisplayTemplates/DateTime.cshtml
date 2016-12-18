@@ -1,0 +1,6 @@
+﻿@model DateTime?
+
+@if (Model.HasValue)
+{
+    @Convert.ToDateTime(Model).ToString("yyyy/MM/dd")
+}

@@ -1,0 +1,28 @@
+﻿@model ClubManager.Models.ClubModels.Member
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.club.ClubName)</dt>
+        <dd>@Html.DisplayFor(model => model.club.ClubName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.student.FirstName)</dt>
+        <dd>@Html.DisplayFor(model => model.student.FirstName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.student.LastName)</dt>
+        <dd>@Html.DisplayFor(model => model.student.LastName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Approved)</dt>
+        <dd>@Html.DisplayFor(model => model.Approved)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Details", "Clubs", new { id = Model.ClubId }, null)
+</p>

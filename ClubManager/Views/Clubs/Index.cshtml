@@ -1,0 +1,79 @@
+﻿@using ClubManager.Models.ClubModels
+@model IEnumerable<ClubManager.Models.ClubModels.Club>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="form-inline" id="ClubCreate">
+</div>
+
+<div id="clubEventModal" class="my-modal modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="clubEventModalContent"></div>
+        </div>
+    </div>
+</div>
+
+<h2 class="page-header">All Clubs</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" class="form-inline">
+            <div class="form-group">
+                <label class="sr-only" for="Search_ClubName">Club Name</label>
+                <input type="search" name="Search_ClubName" class="form-control" value="@ViewBag.CurrentSearch" />
+            </div>
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <p class="text-right">
+            @Html.ActionLink("Add", "_Create", "Clubs", null, new { data_modal = "", @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    @foreach (Club club in Model)
+    {
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="~/Content/Images/-text.png" alt="Image" class="img-responsive" style="width: 100%">
+                <div class="caption">
+                    <h3>@Html.DisplayFor(x => club.ClubName)</h3>
+
+                    <p class="well">Creation Date: @Html.DisplayFor(x => club.CreationDate)</p>
+                    <p>@ViewBag.User</p>
+                    <p>
+                        @Html.ActionLink("Details", "Details", "Clubs", new { id = club.ClubId }, new { @class = "btn btn-primary" })
+
+                        @Html.ActionLink("Join", "Join", "Clubs", new { id = club.ClubId }, new { @class = "btn btn-success" })
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("a[data-modal]").on("click", function (e) {
+                $("#clubEventModalContent").load(this.href, function () {
+                    $("#clubEventModal").modal({
+                        keyboard: true
+                    }, "show");
+
+                });
+                return false;
+            });
+
+        });
+
+    </script>
+}

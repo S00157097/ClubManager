@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ClubManager.Models.ClubModels.ClubEvent>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Club Event Index</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.associatedClub.ClubName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDateTime)
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.associatedClub.ClubName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Venue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDateTime)
+        </td>
+        <td class="pad-anchors">
+            @Html.ActionLink("Details", "Details", new { id = item.EventId })
+
+            <a href="@Url.Action("Edit", "ClubEvents", new { id = item.EventId })" class="text-success">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+
+            <a href="@Url.Action("Delete", "ClubEvents", new { id = item.EventId })" class="text-danger">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

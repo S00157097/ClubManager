@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ClubManager.Models.ClubModels.Member>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.student.FirstName)</th>
+        <th>@Html.DisplayNameFor(model => model.student.LastName)</th>
+        <th>@Html.DisplayNameFor(model => model.Approved)</th>
+        <th>
+            <p>
+                @*@Html.ActionLink("Create New", "Create")*@
+                @*@Html.ActionLink("Add", "_Create", "Members", new { id = (int?)ViewBag.clubId }, new { data_modal = "", @class = "btn btn-primary btn-sm" })*@
+            </p>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.student.FirstName)</td>
+            <td>@Html.DisplayFor(modelItem => item.student.LastName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Approved)</td>
+            <td class="pad-anchors">
+                @Html.ActionLink("Details", "Details", new { id = item.MemberId })
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin") || User.IsInRole("ClubAdmin"))
+                    {
+                        <a href="@Url.Action("Edit", "Members", new { id = item.MemberId })" class="text-success">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+
+                        <a href="@Url.Action("Delete", "Members", new { id = item.MemberId })" class="text-danger">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    }
+
+                    if (User.IsInRole("Member"))
+                    {
+
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

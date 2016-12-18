@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ClubManager.Models.ClubModels.ClubEvent>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDateTime)
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("Add", "_Create", "ClubEvents", new { id = (int?)ViewBag.clubId }, new { data_modal = "", @class = "btn btn-primary btn-sm" })
+            </p>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDateTime)
+            </td>
+            <td class="pad-anchors">
+                @Html.ActionLink("Details", "Details", new { id = item.EventId })
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Join", "ClubEvents", new { id = item.EventId })" class="text-success">
+                        <span class="glyphicon glyphicon-heart"></span>
+                    </a>
+
+                    if (User.IsInRole("Admin") || User.IsInRole("ClubAdmin"))
+                    {
+                        <a href="@Url.Action("Edit", "ClubEvents", new { id = item.EventId })" class="text-success">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    }
+
+                    if (User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("Delete", "ClubEvents", new { id = item.EventId })" class="text-danger">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    }
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,24 @@
+﻿@using ClubManager.Models.ClubModels
+@model IEnumerable<Club>
+
+
+@foreach (Club club in Model)
+{
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="~/Content/Images/-text.png" alt="Image" class="img-responsive" style="width: 100%">
+            <div class="caption">
+                <h3>@Html.DisplayFor(x => club.ClubName)</h3>
+
+                <p class="well">Creation Date: @Html.DisplayFor(x => club.CreationDate)</p>
+                <p>@ViewBag.User</p>
+                <p>
+                    @Html.ActionLink("Details", "Details", "Clubs", new { id = club.ClubId }, new { @class = "btn btn-primary" })
+
+                    @Html.ActionLink("Join", "Join", "Clubs", new { id = club.ClubId }, new { @class = "btn btn-success" })
+                </p>
+            </div>
+        </div>
+    </div>
+
+}
